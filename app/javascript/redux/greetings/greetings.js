@@ -7,22 +7,6 @@ export const getGreetings = createAsyncThunk("greetings/getGreetings", async () 
     .then((data) => data);
     return response;  
 });
-  
-
-
-// export const greet = data => ({
-//     type: GET_GREETINGS,
-//     data,
-// });
-
-// export default function greetingsReducer(state = [], action = {}) {
-//   switch (action.type) {
-//     case GET_GREETINGS:
-//       return action.payload;
-//     default:
-//       return state;
-//   }
-// }
 
 const initialState = {
     message: "No Message",
