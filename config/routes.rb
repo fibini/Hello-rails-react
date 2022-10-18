@@ -1,5 +1,6 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
-  resources :greetings
   root 'root#index'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -7,7 +8,7 @@ Rails.application.routes.draw do
   # root "articles#index"
 
   namespace :api do
-    namespace :v1 do  
+    namespace :v1 do
       resources :greetings, only: %i[index]
     end
   end

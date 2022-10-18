@@ -1,32 +1,46 @@
-const GET_GREETINGS = "greetings/GET_GREETINGS";
-const API = "http://127.0.0.1:3000/api/v1/greetings";
+import { createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
-function getGreetings() {
-  return async (dispatch) => {
-    const result = await fetch(API);
-    const data = await result.json();
-    const greetings = [];
-    data.forEach((greeting) => {
-      const nextGreeting = {
-        greeting: greeting.greeting_greeting,
-        id: greeting.greeting_id,
-      };
-      greetings.push(nextGreeting);
-    });
-    dispatch({
-      type: GET_GREETINGS,
-      payload: greetings,
-    });
+export const getGreetings = createAsyncThunk("greetings/getGreetings", async () => {
+   const response = fetch("http://127.0.0.1:3000/api/v1/greetings")
+    .then((response) => response.json())
+    .then((data) => data);
+    return response;  
+});
+  
+
+
+// export const greet = data => ({
+//     type: GET_GREETINGS,
+//     data,
+// });
+
+// export default function greetingsReducer(state = [], action = {}) {
+//   switch (action.type) {
+//     case GET_GREETINGS:
+//       return action.payload;
+//     default:
+//       return state;
+//   }
+// }
+
+const initialState = {
+    message: "No Message",
   };
-}
-
-export default function greetingsReducer(state = [], action = {}) {
-  switch (action.type) {
-    case GET_GREETINGS:
-      return action.payload;
-    default:
-      return state;
-  }
-}
-
-export { getGreetings };
+  
+  const greetingsReducer = createSlice({
+    name: "message",
+    initialState,
+    reducers: {},
+    extraReducers: {
+      [getGreetings.fulfilled]: (state, action) => ({
+        ...state,
+        message: action.payload,
+      }),
+      [getGreetings.rejected]: (state) => ({
+        ...state,
+      }),
+    },
+  });
+  
+  export default greetingsReducer.reducer;

@@ -1,6 +1,12 @@
-class Api::V1::GreetingsController < ApplicationController
-    def index
-        @greetings = Greeting.all
-        render json: @greetings
+# frozen_string_literal: true
+
+module Api
+  module V1
+    class GreetingsController < ApplicationController
+      def index
+        greetings = Greeting.find(rand(1..5))
+        render json: { message: greetings.greeting }
+      end
     end
+  end
 end
