@@ -1,4 +1,3 @@
-
 const GET_GREETINGS = "greetings/GET_GREETINGS";
 const API = "http://127.0.0.1:3000/api/v1/greetings";
 
